@@ -1,2 +1,2 @@
 # 471NETWpfUserControlsLibrary
-Own controls little library
+Own WPF controls little library
