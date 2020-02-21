@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="NET471WpfUserControlsLibrary.ChoosersPickers.FontChooserUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NET471WpfUserControlsLibrary"
+             xmlns:pickers="clr-namespace:NET471WpfUserControlsLibrary.ChoosersPickers"
+             xmlns:covnerters="clr-namespace:NET471WpfUserControlsLibrary.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" x:Name="Root" Background="White"
+             d:DesignHeight="450" d:DesignWidth="224">
+    <UserControl.Resources>
+        <covnerters:FontChooserTextAlignmentConverter x:Key="FontChooserTextAlignmentConverter"/>
+        <CollectionViewSource x:Key="Fonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}"/>
+        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}">
+            <Setter Property="Opacity" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" Value="0.4"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="UnderlinedToggleButtonControlTemplate" TargetType="{x:Type ToggleButton}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#210080FF"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#210080FF"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsKeyboardFocused" Value="True"/>
+                        <Condition Property="IsChecked" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </MultiTrigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="StrikethroughToggleButtonControlTemplate" TargetType="{x:Type ToggleButton}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                <TextBlock Text="{TemplateBinding Content}" TextDecorations="Strikethrough"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#210080FF"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#80DADADA"/>
+                    <Setter Property="Background" Value="#210080FF"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsKeyboardFocused" Value="True"/>
+                        <Condition Property="IsChecked" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </MultiTrigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="BorderBrush" Value="#90006CD9"/>
+                    <Setter Property="Background" Value="#400080FF"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29"/>
+            <RowDefinition Height="29"/>
+            <RowDefinition Height="29"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="True">
+            <ComboBox Name="SizeChooser" DockPanel.Dock="Right" Height="23" MinWidth="45" VerticalAlignment="Top" IsEditable="True" Margin="2,3,3,3" FontSize="14"
+                      Text="{Binding ElementName=Root,Path=ChoosedFontSizeText}"
+                      ItemsSource="{Binding ElementName=Root,Path=FontSizes}"
+                      SelectedItem="{Binding ElementName=Root,Path=ChoosedFontSize}"
+                      KeyDown="SizeChooser_KeyDown" LostFocus="SizeChooser_LostFocus"/>
+            <ComboBox Name="FontChooser" DockPanel.Dock="Left" MinWidth="170" Height="23" VerticalAlignment="Top" IsEditable="True" Margin="3,3,2,3" FontSize="14"
+                      ItemsSource="{Binding Source={StaticResource Fonts}}"
+                      SelectedItem="{Binding ElementName=Root, Path=ChoosedFontFamily}">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontFamily="{Binding}" Height="20"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <ToggleButton Name="Bold" FontWeight="Bold" Margin="3,3,2,3" FontSize="14"
+                          IsChecked="{Binding ElementName=Root,Path=IsBold,Mode=TwoWay}">
+                    B
+                </ToggleButton>
+                <ToggleButton Name="Italic" FontStyle="Italic" Margin="2,3,2,3" FontSize="14"
+                          IsChecked="{Binding ElementName=Root,Path=IsItalic,Mode=TwoWay}">
+                    I
+                </ToggleButton>
+                <ToggleButton Name="Underlined"  Margin="3,3,2,3" FontSize="14"
+                          IsChecked="{Binding ElementName=Root,Path=IsUnderlined,Mode=TwoWay}" Template="{DynamicResource UnderlinedToggleButtonControlTemplate}">
+                    U
+                </ToggleButton>
+                <ToggleButton Name="Strikethrough"  Margin="3,3,0,3" FontSize="14"
+                          IsChecked="{Binding ElementName=Root,Path=IsStrikeThrough,Mode=TwoWay}" Template="{DynamicResource StrikethroughToggleButtonControlTemplate}">
+                    abc
+                </ToggleButton>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="10,2,2,2"/>
+            </StackPanel>
+            <pickers:ColorPickerPalette x:Name="FontColor" DockPanel.Dock="Right" Margin="10,3,3,3" DefaultSelectedBrush="Black"
+                                      SelectedBrush="{Binding ElementName=Root,Path=ChoosedFontBrush,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+        <UniformGrid Grid.Row="2" Rows="1">
+            <ComboBox HorizontalAlignment="Center" Width="40" Margin="3"
+                      ItemsSource="{Binding ElementName=Root, Path=HorizontalAlignments}"
+                      SelectedItem="{Binding ElementName=Root, Path=ChoosedHorizontalAlignment, Converter={StaticResource FontChooserTextAlignmentConverter}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Source}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox HorizontalAlignment="Center" Width="40" Margin="3"
+                      ItemsSource="{Binding ElementName=Root, Path=VerticalAlignments}"
+                      SelectedItem="{Binding ElementName=Root, Path=ChoosedVerticalAlignment, Converter={StaticResource FontChooserTextAlignmentConverter}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Source}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </UniformGrid>
+    </Grid>
+</UserControl>
